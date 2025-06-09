@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch CrazyGames Homepage</title>
+</head>
+<body>
+  <h1>CrazyGames Homepage Source</h1>
+  <button id="fetch-btn">Fetch CrazyGames HTML</button>
+  <pre id="output" style="white-space: pre-wrap; word-break: break-all;"></pre>
+  <script>
+    document.getElementById('fetch-btn').addEventListener('click', function() {
+      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.crazygames.com')}`)
+        .then(response => {
+          if (response.ok) return response.json();
+          throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+          document.getElementById('output').textContent = data.contents;
+        })
+        .catch(error => {
+          document.getElementById('output').textContent = 'Error: ' + error.message;
+        });
+    });
+  </script>
+</body>
+</html>
